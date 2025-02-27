@@ -14,12 +14,13 @@ Below is the standard example setup
 # =================================================================
 #  vm shutdown/start runbook module
 module "vm_automation" {
-  source = "git::https://github.com/hmcts/cnp-module-automation-runbook-start-stop-vm"
+  source = "git::https://github.com/fabricesemti80/module-tf-automation-runbook-start-stop-vm"
 
   product                 = "xyz"
   env                     = "sbox"
   location                = "uksouth"
   automation_account_name = "xyz-sbox-aa"
+  subscription_name       = "xyz-sbox-sub"
   schedules       = [
                       {
                         name        = "vm-on"
@@ -52,12 +53,13 @@ Below is an example of a mon-friday schedule
 # =================================================================
 #  vm shutdown/start runbook module
 module "vm_automation" {
-  source = "git::https://github.com/hmcts/cnp-module-automation-runbook-start-stop-vm"
+  source = "git::https://github.com/fabricesemti80/module-tf-automation-runbook-start-stop-vm"
 
   product                 = "xyz"
   env                     = "sbox"
   location                = "uksouth"
   automation_account_name = "xyz-sbox-aa"
+  subscription_name       = "xyz-sbox-sub"
   schedules       = [
                       {
                         name        = "vm-on"
