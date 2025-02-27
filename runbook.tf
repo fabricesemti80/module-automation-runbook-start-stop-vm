@@ -38,7 +38,7 @@ resource "azurerm_automation_schedule" "vm-start-stop" {
 
   interval    = each.value.interval
   timezone    = var.timezone
-  start_time  = "${formatdate("YYYY-MM-DD", timeadd(timestamp(), "24h"))}T${each.value.run_time}Z"
+  start_time  = each.value.run_time
   description = "Schedule to ${each.value.start_vm == true ? "start" : "stop"} vm at ${each.value.run_time}"
 
   depends_on = [
