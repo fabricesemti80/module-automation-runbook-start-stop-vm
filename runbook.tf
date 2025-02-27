@@ -7,7 +7,7 @@ resource "azurerm_automation_runbook" "vm-start-stop" {
   log_verbose             = var.env == "prod" ? "false" : "true"
   log_progress            = "false"
   description             = "This is a powershell runbook used to stop and start ${var.product} VMs"
-  runbook_type            = "PowerShell"
+  runbook_type            = "PowerShell72"
   content                 = file("${path.module}/vm-start-stop.ps1")
 
   tags = var.tags
