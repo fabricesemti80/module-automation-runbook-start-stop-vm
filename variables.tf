@@ -45,12 +45,14 @@ variable "schedules" {
     error_message = "'frequency' must be one of the following: 'OneTime', 'Day', 'Hour', 'Week', or 'Month'."
   }
 
-  validation { #Check for valid time format
+  validation {
+    # Check for valid date-time format
     condition = alltrue([
-      for s in var.schedules : can(regex("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$", s.run_time))
+      for s in var.schedules : can(regex("^\\d{4}-\\d{2}-\\d{2}T(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]Z$", s.run_time))
     ])
-    error_message = "'run_time' must be be in the format 'HH:MM:SS'."
+    error_message = "'run_time' must be in the format 'YYYY-MM-DDTHH:MMZ'."
   }
+
 
   validation { # Check valid week days
     condition = alltrue(flatten([
