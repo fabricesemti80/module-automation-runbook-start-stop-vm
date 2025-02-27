@@ -1,11 +1,14 @@
 Param(
-    [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] 
-    [String] 
-    $mi_principal_id,
-    [parameter(Mandatory=$true)][ValidateNotNullOrEmpty()]
+    # [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] 
+    # [String] 
+    # $mi_principal_id,
+    [Parameter(Mandatory = $true, HelpMessage = "Subscription name")]
+    [string]
+    $subscription_name,  
+    [parameter(Mandatory=$true, HelpMessage = "List of managed VM-s")][ValidateNotNullOrEmpty()]
 	[string]
     $vmlist,
-    [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] 
+    [Parameter(Mandatory=$true, HelpMessage = "Resource group to target")][ValidateNotNullOrEmpty()] 
     [String] 
     $resourcegroup,    
     [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] 
@@ -14,14 +17,37 @@ Param(
 )
 
 Write-Output "Script started at $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
-# Ensures you do not inherit an AzContext in your runbook
-Disable-AzContextAutosave -Scope Process | Out-Null
-# Connect to Azure with user-assigned managed identity
-# Don't do what Microsoft say - they use Client_Id here but it needs to be
-# the managed_identity_principal_id
-$AzureContext = (Connect-AzAccount -Identity -AccountId $mi_principal_id).context
-# set and store context
-$AzureContext = Set-AzContext -SubscriptionName $AzureContext.Subscription -DefaultProfile $AzureContext
+
+# # Ensures you do not inherit an AzContext in your runbook
+# Disable-AzContextAutosave -Scope Process | Out-Null
+# # Connect to Azure with user-assigned managed identity
+# # Don't do what Microsoft say - they use Client_Id here but it needs to be
+# # the managed_identity_principal_id
+# $AzureContext = (Connect-AzAccount -Identity -AccountId $mi_principal_id).context
+# # set and store context
+# $AzureContext = Set-AzContext -SubscriptionName $AzureContext.Subscription -DefaultProfile $AzureContext
+
+# Authenticate to Azure (if not already authenticated)
+try {
+    if (-not (Get-AzContext)) {
+        Connect-AzAccount -Identity
+        Write-Output "Authenticated using Managed Identity."
+    }
+} catch {
+    Write-Error "Failed to authenticate to Azure: $_"
+    return
+}
+
+# Set the subscription context
+try {
+    Set-AzContext -SubscriptionName $subscription_name
+    Write-Output "Context set to subscription ID '$subscription_name'"
+} catch {
+    Write-Error "Failed to set subscription context: $_"
+    return
+}
+
+
 # Separate our vmlist into an array we can iterate over
 $VMssplit = $vmlist.Split(",") 
 [System.Collections.ArrayList]$VMs = $VMssplit

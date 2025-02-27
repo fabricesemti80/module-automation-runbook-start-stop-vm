@@ -106,7 +106,7 @@ variable "vm_names" {
   type    = list(string)
   default = []
 }
-variable "mi_principal_id" {
+variable "subscription_name" {
   type    = string
-  default = "Managed identity principle id"
+  default = "Subscription name to target"
 }

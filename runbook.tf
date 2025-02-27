@@ -7,7 +7,7 @@ resource "azurerm_automation_runbook" "vm-start-stop" {
   log_verbose             = var.env == "prod" ? "false" : "true"
   log_progress            = "false"
   description             = "This is a powershell runbook used to stop and start ${var.product} VMs"
-  runbook_type            = "PowerShell"
+  runbook_type            = "PowerShell72"
   content                 = file("${path.module}/vm-start-stop.ps1")
 
   tags = var.tags
@@ -55,10 +55,10 @@ resource "azurerm_automation_job_schedule" "vm-start-stop" {
   runbook_name            = azurerm_automation_runbook.vm-start-stop.name
 
   parameters = {
-    mi_principal_id = var.mi_principal_id
-    vmlist          = join(",", var.vm_names)
-    resourcegroup   = var.resource_group_name
-    start_vm        = each.value.start_vm
+    subscription_name = var.subscription_name
+    vmlist            = join(",", var.vm_names)
+    resourcegroup     = var.resource_group_name
+    start_vm          = each.value.start_vm
   }
 
   depends_on = [
