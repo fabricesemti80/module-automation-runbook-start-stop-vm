@@ -100,17 +100,12 @@ module "vm_automation" {
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 4.0 |
->>>>>>> 24fbaad12b58427ceb25c45beea51d908f34fe5c
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-<<<<<<< HEAD
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 2.97.0 |
-=======
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 4.0 |
->>>>>>> 24fbaad12b58427ceb25c45beea51d908f34fe5c
 
 ## Modules
 
@@ -120,54 +115,14 @@ No modules.
 
 | Name | Type |
 |------|------|
-<<<<<<< HEAD
-| [azurerm_automation_runbook.vm-start-stop](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/automation_runbook) | resource |
-| [azurerm_automation_schedule.vm-start-stop](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/automation_schedule) | resource |
-| [azurerm_automation_job_schedule.vm-start-stop](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/automation_job_schedule) | resource |
-=======
 | [azurerm_automation_job_schedule.vm-start-stop](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/automation_job_schedule) | resource |
 | [azurerm_automation_runbook.vm-start-stop](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/automation_runbook) | resource |
 | [azurerm_automation_schedule.vm-start-stop](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/automation_schedule) | resource |
->>>>>>> 24fbaad12b58427ceb25c45beea51d908f34fe5c
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-<<<<<<< HEAD
-| product | Product name | `string` | n/a | yes |  
-| env | Environment | `string` | n/a | yes |  
-| location | Location | `string` | uksouth | no |  
-| automation_account_name | Automation account name | `string` | n/a | yes |   
-| resource_group_name | Resource group name | `string` | n/a | yes |  
-| schedules | Object containaing schedules name, frequency, interval, start time and desired state | `schedules object` | n/a | yes |  
-| vm_names | Names of VMs to apply runbook to | `array` | [] | no |  
-| timezone | timezone | `string` | Europe/London | no |  
-| tags | Runbook Tags | `map(string)` | n/a | yes |
-
-### Schedules object
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| name | Specifies the name of the Schedule | `string` | n/a | yes |
-| frequency | The frequency of the schedule. - can be either `OneTime`, `Day`, `Hour`, `Week`, or `Month`. | `string` | n/a | yes |
-| interval | The number of frequencys between runs. Only valid when frequency is `Day`, `Hour`, `Week`, or `Month` and defaults to `1` | `string` | n/a | yes |
-| run_time | Time the schedule should run | `string` | n/a | yes |
-| start_vm | What action to be taken `true` to start VM, `false` to shutdown VM | `bool` | n/a | yes |
-| week_days | List of days of the week that the job should execute on. Only valid when frequency is `Week` | `list` | n/a | no |
-| month_days | List of days of the month that the job should execute on. Must be between `1` and `31`. `-1` for last day of the month. Only valid when frequency is `Month` | `list` | n/a | no |
-| monthly_occurrence | List of occurrences of days within a month | `monthly_occurrence object` | n/a | no |
-
-### monthly_occurrence object
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| day | Day of the occurrence. Must be one of `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday` | `string` | n/a | yes |
-| occurrence | Occurrence of the week within the month. Must be between `1` and `5`. `-1` for last week within the month | `number` | n/a | yes |
-
-
-## Outputs
-
-n/a
-=======
 | <a name="input_automation_account_name"></a> [automation\_account\_name](#input\_automation\_account\_name) | automation account name | `string` | n/a | yes |
 | <a name="input_env"></a> [env](#input\_env) | n/a | `string` | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | Location of Runbook | `string` | `"uksouth"` | no |
