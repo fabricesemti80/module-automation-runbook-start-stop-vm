@@ -110,3 +110,14 @@ variable "subscription_name" {
   type    = string
   default = "Subscription name to target"
 }
+variable "target_subscription_name" {
+  description = "Optional target subscription name to override the default subscription name."
+  type        = string
+  default     = null
+}
+
+variable "target_resource_group_name" {
+  description = "Optional target resource group name to override the default resource group name."
+  type        = string
+  default     = null
+}

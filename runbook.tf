@@ -55,9 +55,9 @@ resource "azurerm_automation_job_schedule" "vm-start-stop" {
   runbook_name            = azurerm_automation_runbook.vm-start-stop.name
 
   parameters = {
-    subscription_name = var.subscription_name
+    subscription_name = var.target_subscription_name != null ? var.target_subscription_name : var.subscription_name
     vmlist            = join(",", var.vm_names)
-    resourcegroup     = var.resource_group_name
+    resourcegroup     = var.target_resource_group_name != null ? var.target_resource_group_name : var.resource_group_name
     start_vm          = each.value.start_vm
   }
 
