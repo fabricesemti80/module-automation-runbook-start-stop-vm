@@ -30,7 +30,8 @@ Write-Output "Script started at $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
 # Authenticate to Azure (if not already authenticated)
 try {
     if (-not (Get-AzContext)) {
-        Connect-AzAccount -Identity
+        # Connect-AzAccount -Identity
+        $AzureContext = (Connect-AzAccount -Identity).context
         Write-Output "Authenticated using Managed Identity."
     }
 } catch {
@@ -40,7 +41,8 @@ try {
 
 # Set the subscription context
 try {
-    Set-AzContext -SubscriptionName $subscription_name
+    # Set-AzContext -SubscriptionName $subscription_name
+    $AzureContext = Set-AzContext -SubscriptionName $subscription_name -DefaultProfile $AzureContext
     Write-Output "Context set to subscription ID '$subscription_name'"
 } catch {
     Write-Error "Failed to set subscription context: $_"
